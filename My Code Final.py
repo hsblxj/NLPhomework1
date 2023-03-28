@@ -80,7 +80,7 @@ def Two_Gram(txt3):
     print("2-gram:\n")
     # 计算字频并排序
     word_freq = Counter(seg_list)
-    ansdict = word_freq.most_common()  # 返回出现次数最多的两个数及其出现的次数
+    ansdict = word_freq.most_common()  # 返回list
 
     # 计算信息熵
     word_freq = ansdict
@@ -94,7 +94,6 @@ def Two_Gram(txt3):
 
     shannoEnt = 0.0
     for j in range(len(word_freq)):
-        # 计算p(xi)
         prob = word_freq[j][1] / len(seg_list)  # 联合概率P(xy)
         temp_times = 0
         for k in range(len(firstword_ansdict)):
@@ -104,8 +103,8 @@ def Two_Gram(txt3):
         shannoEnt -= prob * math.log(word_freq[j][1]/temp_times, 2)
     # 输出前10及词频并输出信息熵
     print("词库总词数：", len(seg_list), "\n", "不同词的个数：", len(word_freq))
-    print("entropy_1gram:", shannoEnt)
-    print("出现频率前10的字/词组：", word_freq[:10])
+    print("entropy_2gram:", shannoEnt)
+    print("出现频率前10的词组：", word_freq[:10])
 
 
 if __name__ == "__main__":
@@ -115,4 +114,3 @@ if __name__ == "__main__":
     One_Gram(txt1)
     # 2-Gram
     Two_Gram(txt1)
-
